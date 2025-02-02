@@ -1,0 +1,71 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'قائمة العناصر',
+      home: ItemListScreen(),
+    );
+  }
+}
+
+class ItemListScreen extends StatefulWidget {
+  @override
+  _ItemListScreenState createState() => _ItemListScreenState();
+}
+
+class _ItemListScreenState extends State<ItemListScreen> {
+  final List<String> items = [];
+  final TextEditingController _controller = TextEditingController();
+
+  void _addItem() {
+    if (_controller.text.isNotEmpty) {
+      setState(() {
+        items.add(_controller.text);
+        _controller.clear();
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('قائمة العناصر'),
+      ),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextField(
+              controller: _controller,
+              decoration: InputDecoration(
+                labelText: 'أدخل عنصر',
+                border: OutlineInputBorder(),
+              ),
+            ),
+          ),
+          ElevatedButton(
+            onPressed: _addItem,
+            child: Text('إضافة'),
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: items.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text(items[index]),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

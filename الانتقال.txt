@@ -1,0 +1,69 @@
+import 'package:flutter/material.dart';
+import 'dart:async';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Timer Navigation',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: FirstPage(),
+    );
+  }
+}
+
+class FirstPage extends StatefulWidget {
+  @override
+  _FirstPageState createState() => _FirstPageState();
+}
+
+class _FirstPageState extends State<FirstPage> {
+  @override
+  void initState() {
+    super.initState();
+    // بدء المؤقت بعد فترة زمنية محددة
+    Timer(Duration(seconds: 5), () {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => SecondPage()),
+      );
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('الصفحة الأولى'),
+      ),
+      body: Center(
+        child: Text(
+          'سوف تنتقل إلى الصفحة الثانية بعد5 ثوانٍ...',
+          style: TextStyle(fontSize: 20),
+        ),
+      ),
+    );
+  }
+}
+
+class SecondPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('الصفحة الثانية'),
+      ),
+      body: Center(
+        child: Text(
+          'مرحبًا بك في الصفحة الثانية!',
+          style: TextStyle(fontSize: 20),
+        ),
+      ),
+    );
+  }
+}

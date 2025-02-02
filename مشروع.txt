@@ -1,0 +1,105 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'محل الخضروات والفواكه',
+      theme: ThemeData(
+        primarySwatch: Colors.green,
+      ),
+      home: LoginScreen(),
+    );
+  }
+}
+
+class LoginScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('تسجيل الدخول')),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            TextField(decoration: InputDecoration(labelText: 'البريد الإلكتروني')),
+            TextField(decoration: InputDecoration(labelText: 'كلمة المرور'), obscureText: true),
+            ElevatedButton(
+              child: Text('دخول'),
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class HomeScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('الصفحة الرئيسية')),
+      drawer: SideMenu(),
+      body: Center(child: Text('مرحبًا بكم في محل الخضروات والفواكه!')),
+    );
+  }
+}
+
+class SideMenu extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: <Widget>[
+          DrawerHeader(
+            child: Text('القائمة الجانبية', style: TextStyle(color: Colors.white, fontSize: 24)),
+            decoration: BoxDecoration(color: Colors.green),
+          ),
+          ListTile(
+            title: Text('الخضروات'),
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => VegetablesScreen()));
+            },
+          ),
+          ListTile(
+            title: Text('الفواكه'),
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => FruitsScreen()));
+            },
+          ),
+          // أضف المزيد من الخيارات حسب الحاجة
+        ],
+      ),
+    );
+  }
+}
+
+class VegetablesScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('الخضروات')),
+      body: Center(child: Text('عرض الخضروات هنا')),
+    );
+  }
+}
+
+class FruitsScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('الفواكه')),
+      body: Center(child: Text('عرض الفواكه هنا')),
+    );
+  }
+}
+
+// يمكنك إضافة المزيد من الشاشات حسب الحاجة
